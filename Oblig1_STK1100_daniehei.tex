@@ -269,6 +269,209 @@ V[X] = E[X^2] - E[X]^2 = \frac{1}{2\theta -1} - \frac{1}{(1-\theta) ^2}
 $$ 
 
 
+\section*{Oppgave 3)}
+\subsection*{a)}
+
+For å finne den kumulative fordelingsfunksjonen til $X$ legger vi merke til at 
+
+\begin{equation}
+F(x) = P( X\leq x) = 1 - P(X>x)
+\label{eq:dodlighetF}
+\end{equation}
+
+$q_{x}$ er sannsynligheten for at en x år gammel person skal dø før personen fyller $x + 1$ år. Det betyr at sjansen for at personen overlever dette året er 
+
+$$
+1 - q_x
+$$
+
+$P(X>x)$ er sannsynligheten for at personen blir eldre enn $x$, dette betyr at personen på ha overlevd alle årene opp til og med år $x$. Dette er produktet av sannsynligheten for å overleve de enkelte årene. Vi er bare interessert i sjansen overlever når de er over $35$ år, så:
+
+$$
+P(X>x) = \prod_{y = 0}^x(1-q_{35+y})
+$$
+
+Vi kan så sette dette inn i \eqref{eq:dodlighetF} og ser at:
+
+\begin{equation}
+F(x) = 1 - P(X>x) = 1 - \prod_{y = 0}^x(1-q_{35+y})
+\end{equation}
+
+\subsection*{b)}
+
+Punktsannsynligheten er sannsynligheten for at personen ble maks $x$ år gammel, men eldre enn $x-1$ år gammel, som gir oss:
+
+$$
+p(x) = P(X=x) = P(x-1<X\leq x) = F(x) - F(x-1)
+$$
+
+Siden vi sier at ingen kan bli eldre enn $106$ år gammel, så kan $x$ bare være definert i intervallet $0\leq x \leq 71$.
+
+\subsection*{c)}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{3c.png}
+\caption{Punktsannsynligheten $p(x)$ for å finne en person med alderen $x + 35$ år.}
+\end{figure}
+
+Vi kan se at denne punktsannsynligheten er tilnærmet en Poisson-fordeling.
+
+\subsection*{d)}
+
+$h(x)$ er nåverdien til den samlede pensjonsutbetalingen. Dør mannen før han fyller $35$ år vil han ikke få noe utbetalt. Får han ikke noe utbetalt, vil nåverdien til dette beløpet også være 0. Det betyr at for $X\leq 34$ $h(X) = 0$.\\
+
+Nåverdien er hvor mye penger som må settes inn i banken for at det etter $k$ år er blitt beløpet $K$. I vårt tilfelle mannen få $K = 100 000$ i året. Nå verdien for disse pengene er gitt som
+
+$$
+\frac{100000}{1.03^k}
+$$  
+
+med $3\%$ rente. Han får dette beløpet verdt år etter han har fylt $70$ år. For det første beløpet han får utbetalt har pengene stått $35$ år i banken, og for det andre har de stått der $36$ år. Den totale mengden penger han får utbetalt er $\sum_{x = 35}^{x}100000$ kr. ($100000$ for hvert år etter 70 år). Vi må finne nåverdien for hvert av disse årene. Dette betyr at vi får nåverdien:
+
+\begin{equation}
+h(X) = \sum_{x = 35}^{x}\frac{100000}{1.03^k}
+\label{eq:h}
+\end{equation}
+
+Vi kjenner igjen at dette er en geometisk rekke. Formelen for en slik rekke sier at
+
+$$
+\sum_a^b r^k = \frac{r^a - r^{b+1}}{1-r}
+$$
+
+Bruker vi dette med \eqref{eq:h} finner vi
+
+$$
+h(X)  = \sum_{x = 35}^{x}\frac{10000}{1.03^k} = 100000 \frac{\frac{1}{1.03^{35}} - \frac{1}{1.03^{x+1}}}{1 - \frac{1}{1.03}}
+$$
+$$
+= \frac{100000}{1.03^{35}}\frac{1-(1/1.03)^{x+1-35}}{1 - (1/1.03)}
+$$
+
+Dette gir oss endelig at nåverdien er
+
+\begin{equation}
+h(X) = \frac{100000}{1.03^{35}}\frac{1-(1/1.03)^{x-34}}{1 - (1/1.03)}
+\label{eq:nåverdi}
+\end{equation}
+
+For $X\geq 35$.
+
+\subsection*{e)}
+
+Forventingsverdien til nåverdien $h(X)$ er gitt ved
+
+$$
+E[h(X)] = \sum_{x = 0}^{71}h(X)p(x)
+$$
+
+Men siden $h(X) = 0$ for $X<35$ forenkles summen til
+$$
+E[h(X)] = \sum_{x = 35}^{71}h(x)p(x)
+$$
+
+Vi kan så regne ut dette 
+
+$$
+\sum_{x = 35}^{71}h(X)p(x) = \sum_{x = 35}^{71}\frac{100000}{1.03^{35}}\frac{1-(1/1.03)^{x-34}}{1 - (1/1.03)} p(x)
+$$
+$$
+= \frac{100000}{1.03^{35}}\frac{\sum_{x = 35}^{71}\left(1 - (1/1.03)^{x-34}\right)}{1-(1/1.03)} p(x)
+$$
+
+Vi kan se at $\sum_{x = 35}^{71} p(x) = P(X\geq 35)$, vi får derfor
+
+\begin{equation}
+E[h(X)] = \frac{100000}{1.03^{35}}\cdot\frac{P(X\geq 35) - \sum_{x = 35}^{71}(1/1.03)^{x-34}p(x)}{1-(1/1.03)} 
+\end{equation}
+
+\subsection*{f)}
+
+Løser jeg dette med koden du finner nedest i dokumentet, finner jeg at
+
+$$
+E[h(X)] = \underline{\underline{387142}} \text{ kr}
+$$
+
+\subsection*{g)}
+
+Som i deloppgave \textit{d)} er nåverdien gitt som 
+
+$$
+\frac{K}{1.03^k}
+$$
+
+Der $K$ er premien, $1.03$ er renten og $k$ er antall år. \\
+
+Den samlede nåverdien er summen mannen betaler til han er $69$ år eller dør. Så om $X<35$, betaler han til han dør i en alder av $k = x$. Men om han blir $70$ år eldre ($X\geq 35$) betaler han bare til han er $69$ år -- ved $70$ år slutter han å betale, og får heller utbetalt fra forsikringen--. Dette betyr at han betaler til $k = \min(X,34)$. Om nåverdien er gitt som $K\cdot g(X)$, så finner vi at
+
+\begin{equation}
+g(X) = \sum_{k = 0}^{\min(X,34)}\frac{1}{1.03^k}
+\end{equation}
+
+\subsection*{h)}
+
+Vi gjenkjenner $g(X)$ som enda en geometrisk rekke, så vi skriver derfor den om som
+
+$$
+g(X) = \frac{1-(1/1.03)^{\min(X,34)+1}}{1-(1/1.03)}
+$$
+
+Vi kan så regne ut forventningsverdien til $g(X)$
+
+$$
+E[g(X)] = \sum_{x = 0}^{71}g(X)p(x) = \sum_{x = 0}^{71}\frac{1-(1/1.03)^{\min(X,34)+1}}{1-(1/1.03)} p(x)
+$$
+
+Vi kan splitte summen $\sum_{x = 0}^{71}(1/1.03)^{\min(X,34)}$ inn i 2 deler: Den som gjelder for $X<35$ og den delen hvor mannen har betalt i $34$ år, og ikke lenger betaler premie($X \geq 35$):
+
+$$
+E[g(X)] = \frac{1}{1-(1/1.03)}\left[\underbrace{\sum_{x = 0}^{71} p(x)}_{= 1} - \left(\underbrace{\sum_{x = 0}^{34}(1/1.03)^{x+1}p(x)}_{\text{For }X<35} + \underbrace{\sum_{x = 35}^{71} (1/1.03)^{34 + 1}p(x)}_{\text{For } \geq 35}\right)\right] 
+$$
+
+Vi ser at det siste leddet blir:
+
+$$
+\sum_{x = 35}^{71} (1/1.03)^{34 + 1}p(x) = (1/1.03)^{35}\sum_{x = 35}^{71} p(x) = (1/1.03)^{35}P(X\geq 35)
+$$
+
+Dette gir oss
+\begin{equation}
+E[g(X)] = \frac{1 - \sum_{x = 0}^{34}(1/1.03)^{x+1}p(x) - (1/1.03)^{35}P(X\geq 35)}{1-(1/1.03)}
+\end{equation}
+
+\subsection*{i)}
+
+Bruker jeg koden gitt nederst i dokumentet, så finner jeg at
+
+$$
+E[g(X)] = \underline{\underline{21.5649}}
+$$
+
+\subsection*{j)}
+
+Bruker vi at 
+
+$$
+K\cdot E[g(X)] = E[h(X)]
+$$
+
+Så kan vi finne at premien mannen må betale i året er 
+
+$$
+K = \frac{E[h(X)]}{E[g(X)]} = \frac{387149}{21.5649} = \underline{\underline{17952.4}}
+$$
+
+Det betyr at vi har funnet at mannen må betale en premie på $K = 17952.4$ kr per år for forsikringen.
+
+\newpage
+
+\section*{Appendix: Koder:}
+
+\lstinputlisting{opp2.py}
+
+
 \end{document}
 
 
