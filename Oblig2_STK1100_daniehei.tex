@@ -1,0 +1,397 @@
+\documentclass[a4paper,norsk, 10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[norsk]{babel}
+\usepackage{a4wide}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage[dvips]{epsfig}
+\usepackage[toc,page]{appendix}
+\usepackage[T1]{fontenc}
+\usepackage{cite} % [2,3,4] --> [2--4]
+\usepackage{shadow}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{marvosym }
+\usepackage{subcaption}
+\usepackage[noabbrev]{cleveref}
+\usepackage{cite}
+
+
+\setlength{\droptitle}{-10em}   % This is your set screw
+
+\setcounter{tocdepth}{2}
+
+\lstset{language=c++}
+\lstset{alsolanguage=[90]Fortran}
+\lstset{alsolanguage=Python}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\title{STK1100 Oblig 2}
+\author{Daniel Heinesen, daniehei}
+\begin{document}
+\maketitle
+
+\section*{Oppgave 1)}
+
+\subsection*{a)}
+Vi har en simultan sannsynlighetsfordelig
+
+\begin{equation}
+f(x,y) = 
+\begin{cases}
+k(x-y) & 0 \leq y \leq x \leq 1 \\
+0 & \text{ellers}
+\end{cases}
+\label{eq:f(x,y)}
+\end{equation}
+
+for å finne $k$ kan vi bruke at fordeligen må være normalisert. Dette betyr at 
+
+\begin{equation}
+I = \int_0^1 \int_0^x k(x-y) dy dx = 1
+\end{equation}
+
+Vi kan regne dette ut:
+
+$$
+I = \int_0^1 \int_0^x k(x-y) dy dx = k\int_0^1 \left[xy-\frac{1}{2}y^2\right]_0^x dx
+$$
+$$
+= k\int_0^1 \frac{1}{2}x^2 dx = k\frac{1}{6}x^3\bigg|_0^1 = \frac{k}{6} = 1
+$$
+
+Dette gir oss at
+
+\begin{equation}
+\underline{\underline{k = 6}}
+\end{equation}
+
+
+\subsection*{b)}
+Vi ønsker å finne $P(2Y \leq X)$. Dette er sannsynligheten at om vi velger en tilfeldig $x$ og en tilfeldig $y$, så er $2Y \leq X \Leftrightarrow Y \leq X/2$. Vi finner sannsynligheten ved
+
+$$
+P(2Y \leq X) = \int_{0}^1\int_0^{x/2}  k(x-y) dydx =k \int_0^{1}\left(xy - \frac{1}{2}y^2\right)\bigg |_0^{x/2}dx = k\int_0^{x/2} \frac{1}{2}x^2 - \frac{1}{8}x^2 dx
+$$
+$$
+= k\frac{1}{8}x^3\bigg|_0^1 = \frac{k}{8} 
+$$
+Setter vi inn verdien for $k$ det endelig svaret:
+
+\begin{equation}
+\underline{\underline{P(2Y \leq X) = \frac{3}{4}}}
+\end{equation}
+
+\subsection*{c)}
+Vi ønsker så å finne den marginale sannsynlighetsfordeligen for $X$. Vi ser først på hvor $0 \leq y \leq x \leq 1$. For å få den marginale sannsynlighetsfordeligen må vi integrere sannsynlighetsfordeligen over alle mulige verdier av $y$, som er $0 \leq y \leq x$, vi får da
+
+\begin{equation}
+f_X(x) = \int_0^x k(x-y)dy = k\left(xy-\frac{1}{2}y^2\right)\bigg|_0^x = \frac{k}{2}x^2 = \underline{{3x^2}}
+\end{equation}
+
+For vi ser nå på de øvrige funksjonene. Her vil $f(x,y) = 0$, som fører til at også $f_X(x) = 0$. Så vi ender opp med at
+
+\begin{equation}
+f_X(x) = 
+\begin{cases}
+3x^2 & 0 \leq x \leq 1 \\
+0 & \text{ellers}
+\end{cases}
+\end{equation}
+
+
+\subsection*{d)}
+
+Vi ønsker så å finne den marginale sannsynlighetsfordeligen for $Y$. Vi starter også her med å se på tilfellene hvor $0 \leq y \leq x \leq 1$. Vi ønsker å integrere $f(x,y)$ over alle de mulige verdiene av $x$, hvilket er $y\leq x \leq 1$:
+
+\begin{equation}
+f_Y(x) = \int_y^1 k(x-y)dy = k\left(\frac{1}{2}x^2 - yx\right)\bigg|_y^1 = k\left(\frac{1}{2}y^2 - y + \frac{1}{2}\right) = \underline{3y^2 - 6y + 3}
+\end{equation}
+
+Akkurat som i deloppgaven over vil $f(x,y) = 0$ for de øvrige tilfellen, noe som gjør at $f_Y(x) = 0$ her. Så vi ender opp med:
+
+\begin{equation}
+f_X(x) = 
+\begin{cases}
+3y^2 - 6y + 3 & 0 \leq y \leq 1 \\
+0 & \text{ellers}
+\end{cases}
+\end{equation}
+
+\subsection*{e)}
+
+For å sjekke om $X$ og $Y$ er uavhenginge kan vi gange samme de marginale sannsynlighetsfordelingene og se om vi før den orginale sannsynlighetsfordelingen \eqref{eq:f(x,y)}:
+
+\begin{equation}
+f_X(x)\cdot f_Y(y) = 3x^2\cdot(3y^2 -6y +3) = 9x^2y^2 -6x^2y + 9x^2 \neq f(x,y)
+\end{equation} 
+
+Siden $f_X(x)\cdot f_Y(y) \neq f(x,y) $ er $X$ og $Y$  \textbf{ikke} uavhenginge.
+
+
+\section*{Oppgave 2)}
+
+\textit{Koden finnes som opp2b.py. Denne koden vil lage alle plottene som er brukt i denne oppgaven.(Alle plotten vil lages og vises når man kjører programmet, så vær forberedt på den når den som retter dette kjører programmet)}
+
+
+\subsection*{a)}
+
+Vi har flere identiske stokatiske variabler $X_i$ som følger: 
+
+\begin{equation}
+E(X_i) = \mu, \qquad V(X_i) = \sigma^2
+\end{equation}
+
+Vi innfører så at 
+
+\begin{equation}
+\overline{X}_i = \frac{1}{n}\sum_{i = 1}^n X_i
+\label{eq:manyMean}
+\end{equation}
+
+Vi har også det standariserte gjennomsnittet
+
+\begin{equation}
+Z_n = \frac{\overline{X}_i - \mu}{\sigma/\sqrt{n}} = \sqrt{n}\frac{\overline{X}_i - \mu}{\sigma}
+\label{eq:stanardMean}
+\end{equation}
+
+Vi kommer til å bruke at for forventingsverdien til flere uavhengige stokastiske variabler er
+
+\begin{equation}
+E\left(a + \sum_{i = 1}^n b_i X_i\right) = a + \sum_{i = 1}^n b_i E(X_i)
+\label{eq:Elinear}
+\end{equation}
+
+Og for variansen er gjelder
+
+\begin{equation}
+V\left(a + \sum_{i = 1}^n b_i X_i\right) = \sum_{i = 1}^n b_i^2 V(X_i)
+\label{eq:Vlinear}
+\end{equation}
+
+Vi kan fra dette se at for de uavhengige stokastiske variablene $X_i$ gjelder:
+
+\begin{equation}
+E(\overline{X}_i) = E\left(\frac{1}{n}\sum_{i = 1}^n X_i\right) = \frac{1}{n}\sum_{i = 1}^n E(X_i) = \frac{1}{n}n\mu = \underline{\underline{\mu}}
+\end{equation}
+
+og
+
+\begin{equation}
+V(\overline{X}_i) =  V\left(\frac{1}{n}\sum_{i = 1}^n X_i\right) = \frac{1}{n^2}\sum_{i = 1}^n  V(X_i) = \frac{1}{n^2}n\sigma^2 = \underline{\underline{\frac{\sigma^2}{n}}}
+\end{equation}
+
+Og for det standariserte gjennomsnittet gjelder
+
+\begin{equation}
+E(Z_n) = E\left(\sqrt{n}\frac{\overline{X}_i - \mu}{\sigma}\right) = \sqrt{n}\left(\frac{E(\overline{X}_i)}{\sigma} - \frac{\mu}{\sigma}\right) = 
+\sqrt{n}\left(\frac{\mu}{\sigma} - \frac{\mu}{\sigma}\right) = \underline{\underline{0}}
+\end{equation}
+
+og
+
+\begin{equation}
+V(Z_n) = V\left(\sqrt{n}\frac{\overline{X}_i - \mu}{\sigma}\right) = n\frac{V(\overline{X}_i)}{\sigma^2} = n\frac{\sigma^2/n}{\sigma^2} = \underline{\underline{1}}
+\end{equation}
+
+\subsection*{b)}
+
+Vi skal her bestemme forventingsverdien og variansen til de 3 følgende fordelingene:
+
+\subsubsection*{Uniform Fordeling:}
+
+Vi har en uniform fordeling:
+
+\begin{equation}
+f(x) =
+\begin{cases}
+\frac{1}{2} & -1\leq x  \leq 1\\
+0 & ellers
+\end{cases}
+\end{equation}
+
+Vi kan regne ut fordelingen:
+
+\begin{equation}
+\mu = E(X_i) = \int_{-1}^1 xf(x) dx =\int_{-1}^1 x\frac{1}{2} dx = \underline{0} 
+\end{equation}
+
+Siden integranden er en 'odd' funksjon. For å regne ut variansen regner vi først ut:
+
+\begin{equation}
+E(X_i^2) = \int_{-1}^1 x^2f(x) dx = \int_{-1}^1 \frac{1}{2}x^2 dx =\frac{1}{6}x^3\bigg|_{-1}^1 = \frac{1}{3} 
+\end{equation}
+
+Vi har da at variansen er
+
+\begin{equation}
+\sigma^2 = V(X_i) = E(X_i^2) - E(X_i)^2 = \underline{\underline{\frac{1}{3}}}
+\end{equation}
+
+\subsubsection*{Gammafordeling:}
+
+Vi har gammafordelingen:
+
+\begin{equation}
+f(x) =
+\begin{cases}
+\frac{1}{\sqrt{\pi x}}e^{-x} & x > 0\\
+0 & ellers
+\end{cases}
+\end{equation}
+
+Dette er en gammafordeling med $\alpha = 1/2$ og $\beta = 1$. Vi vet hva definisjonene på forventingsverdien og variansen er for gammafordelinger, så vi kan fort finne at for denne fordelingen er:
+
+\begin{equation}
+\mu = \alpha\beta = \underline{\underline{\frac{1}{2}}}
+\end{equation}
+
+og 
+
+\begin{equation}
+\sigma^2 = \alpha\beta^2 = \underline{\underline{\frac{1}{2}}}
+\end{equation}
+
+
+\subsubsection*{Bernoullifordeling:}
+
+Vi har en Bernoullifordeling med punktfordelingen $p(x) = P(X = x)$, med en $p = 0.75$, som gir at $p(1) = 0.75$ og $p(0) = 0.25$. Vi vet også de generelle formelene for forventingsverdien og variansen til Bernoullifordelinger. Vi finner så at
+
+\begin{equation}
+\mu = p = \underline{\underline{0.75}}
+\end{equation}
+
+og
+
+\begin{equation}
+\sigma^2 = p(1-p) = \frac{1}{4}\cdot \frac{3}{4} = \underline{\underline{\frac{3}{16}}}
+\end{equation}
+
+\subsection*{c)}
+
+Vi forventer å se at det normerte histogrammet av observasjonene nærmer seg sannsynlighetstettheten til $Z_n$ blir større og større. Teller vi opp antall observasjoner med en viss verdi/innen for et vist intervall vil forvente at jo høyere sannsynlighet for å finne denne observasjonen, jo flere tilfeller vil vi observere, og vis versa. Med nok antall observasjoner vil observasjonen alltid legge seg etter fordlingen til $Z_n$. Siden fordelingen til $Z_n$ er normalisert, så må vi også normere histogrammet for at det skal likne på fordelingen til $Z_n$.
+
+\subsection*{d)}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{histoUniform5.png}
+\caption{Histogram for en uniform fordeling med $n = 5$}
+\label{fig:histoUniform5}
+\end{figure}
+
+
+Vi ser over et histogram med de standariserte gjennomsnittene for en uniform fordeling. Siden vi regnet ut standardiserte gjennomsnitt av observasjoner av fordelingene, så vil vi etter sentralgrenseteoremet forvente at $Z_n$ og dermed histogrammet skal gå mot en normalfordeling. Vi kan se at histogrammet over er veldig nært en normalfordeling. Rett rundt $\mu = 0$ er det noen ekstra topper, men ellers er fordelingen ganske normalfordelt. 
+
+\subsection*{e)}
+
+\textit{Verdiene under finnes i utskrifen til python-programmet.}
+
+
+Tabell for sannsynlighetene til en standardnomalfordelt variable:\\
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+Interval & Sannsynlighet\\
+\hline
+$- \infty$ til $-2.5$ & 0.0062\\
+$- 2.5$ til $-2.0$ & 0.0165\\
+$- 2.0$ til $-1.5$ & 0.0441\\
+$- 1.5$ til $-1.0$ & 0.0919\\
+$- 1.0$ til $-0.5$ & 0.1499\\
+$- 0.5$ til $0.0$ & 0.1915\\
+
+$ 0.0$ til $0.5$ & 0.1915\\
+$ 0.5$ til $1.0$ & 0.1499\\
+$ 1.0$ til $1.5$ & 0.0919\\
+$ 1.5$ til $2.0$ & 0.0441\\
+$ 2.0$ til $2.5$ & 0.0165\\
+$ 2.5$ til $\infty$ & 0.0062\\ \hline
+\end{tabular}
+\caption{Sannsynlighetene til en standardnomalfordelt variable}
+\label{tab:stand}
+\end{table}
+
+
+\subsection*{f)}
+
+På samme måte som vi fant verdiene for en standardnomalfordelt variable, kan vi finne verdiene for vår fordelinge av det standardiserte gjennomsnittet av den uniforme fordelingen:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+Interval & Sannsynlighet\\
+\hline
+$- \infty$ til $-2.5$ & 0.0044\\
+$- 2.5$ til $-2.0$ & 0.0171\\
+$- 2.0$ til $-1.5$ & 0.0457\\
+$- 1.5$ til $-1.0$ & 0.0926\\
+$- 1.0$ til $-0.5$ & 0.1486\\
+$- 0.5$ til $0.0$ & 0.1905\\
+
+$ 0.0$ til $0.5$ & 0.1931\\
+$ 0.5$ til $1.0$ & 0.1494\\
+$ 1.0$ til $1.5$ & 0.0901\\
+$ 1.5$ til $2.0$ & 0.0469\\
+$ 2.0$ til $2.5$ & 0.0175\\
+$ 2.5$ til $\infty$ & 0.0041\\ \hline
+\end{tabular}
+\caption{Sannsynlighetene til en unifrom fordeling med $n = 5$}
+\label{tab:uniform5}
+\end{table}
+
+Vi kan se at disse verdiene er veldig nære de vi fant i deloppgaven over \ref{tab:stand}. Vi kan finne absoluttveriden til forskjellen mellom fordelingen:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+Interval & Forskjell\\
+\hline
+$- \infty$ til $-2.5$ & 0.0018\\
+$- 2.5$ til $-2.0$ & 0.0056\\
+$- 2.0$ til $-1.5$ & 0.00164\\
+$- 1.5$ til $-1.0$ & 0.0008\\
+$- 1.0$ til $-0.5$ & 0.0012\\
+$- 0.5$ til $0.0$ & 0.0010\\
+
+$ 0.0$ til $0.5$ & 0.0016\\
+$ 0.5$ til $1.0$ & 0.0005\\
+$ 1.0$ til $1.5$ & 0.0015\\
+$ 1.5$ til $2.0$ & 0.0028\\
+$ 2.0$ til $2.5$ & 0.0010\\
+$ 2.5$ til $\infty$ & 0.0021\\ \hline
+\end{tabular}
+\caption{Forskjellen til en unifrom fordeling med $n = 5$}
+\label{tab:forskjellUniform5}
+\end{table}
+
+Vi ser her at forskjellen mellom standardnormalfordelingen og vår fordeling er svært liten, som vi forventet ut i fra histogrammet i \ref{fig:histoUniform5}.\\
+
+\textit{Jeg kommer til å ha sannsynligheten og forskjellen fra normalfordelingen i de samme tabellene i resten av oppgaven.}
+
+\subsection*{g)}
+
+
+
+\end{document}
+
+
