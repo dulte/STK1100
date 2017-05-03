@@ -20,7 +20,7 @@
 \usepackage{subcaption}
 \usepackage[noabbrev]{cleveref}
 \usepackage{cite}
-
+\usepackage{fancyvrb}
 
 \setlength{\droptitle}{-10em}   % This is your set screw
 
@@ -303,7 +303,7 @@ Vi ser over et histogram med de standariserte gjennomsnittene for en uniform for
 \textit{Verdiene under finnes i utskrifen til python-programmet.}
 
 
-Tabell for sannsynlighetene til en standardnomalfordelt variable:\\
+Tabell for sannsynlighetene til en standard nomalfordelt variable:\\
 
 \begin{table}[H]
 \centering
@@ -325,14 +325,14 @@ $ 1.5$ til $2.0$ & 0.0441\\
 $ 2.0$ til $2.5$ & 0.0165\\
 $ 2.5$ til $\infty$ & 0.0062\\ \hline
 \end{tabular}
-\caption{Sannsynlighetene til en standardnomalfordelt variable}
+\caption{Sannsynlighetene til en standard nomalfordelt variable}
 \label{tab:stand}
 \end{table}
 
 
 \subsection*{f)}
 
-På samme måte som vi fant verdiene for en standardnomalfordelt variable, kan vi finne verdiene for vår fordelinge av det standardiserte gjennomsnittet av den uniforme fordelingen:
+På samme måte som vi fant verdiene for en standard nomalfordelt variable, kan vi finne verdiene for vår fordelinge av det standardiserte gjennomsnittet av den uniforme fordelingen:
 
 \begin{table}[H]
 \centering
@@ -358,37 +358,305 @@ $ 2.5$ til $\infty$ & 0.0041\\ \hline
 \label{tab:uniform5}
 \end{table}
 
-Vi kan se at disse verdiene er veldig nære de vi fant i deloppgaven over \ref{tab:stand}. Vi kan finne absoluttveriden til forskjellen mellom fordelingen:
+Vi kan se at disse verdiene er veldig nære de vi fant i deloppgaven over \ref{tab:stand}. Vi kan finne den relative forskjellen mellom fordelingen:
+
+[ 0.19480363  0.03872119  0.02594205  0.05609207  0.02146828  0.04263218
+  0.02317707  0.01055685  0.01036437  0.04215145  0.00359926  0.24311541]
+
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|c|}
 \hline
-Interval & Forskjell\\
+Interval & Relativ forskjell \\
 \hline
-$- \infty$ til $-2.5$ & 0.0018\\
-$- 2.5$ til $-2.0$ & 0.0056\\
-$- 2.0$ til $-1.5$ & 0.00164\\
-$- 1.5$ til $-1.0$ & 0.0008\\
-$- 1.0$ til $-0.5$ & 0.0012\\
-$- 0.5$ til $0.0$ & 0.0010\\
+$- \infty$ til $-2.5$ & 0.195\\
+$- 2.5$ til $-2.0$ & 0.039\\
+$- 2.0$ til $-1.5$ & 0.026\\
+$- 1.5$ til $-1.0$ & 0.056\\
+$- 1.0$ til $-0.5$ & 0.022\\
+$- 0.5$ til $0.0$ & 0.043\\
 
-$ 0.0$ til $0.5$ & 0.0016\\
-$ 0.5$ til $1.0$ & 0.0005\\
-$ 1.0$ til $1.5$ & 0.0015\\
-$ 1.5$ til $2.0$ & 0.0028\\
-$ 2.0$ til $2.5$ & 0.0010\\
-$ 2.5$ til $\infty$ & 0.0021\\ \hline
+$ 0.0$ til $0.5$ & 0.023\\
+$ 0.5$ til $1.0$ & 0.011\\
+$ 1.0$ til $1.5$ & 0.01\\
+$ 1.5$ til $2.0$ & 0.042\\
+$ 2.0$ til $2.5$ & 0.004\\
+$ 2.5$ til $\infty$ & 0.243\\ \hline
 \end{tabular}
 \caption{Forskjellen til en unifrom fordeling med $n = 5$}
 \label{tab:forskjellUniform5}
 \end{table}
 
-Vi ser her at forskjellen mellom standardnormalfordelingen og vår fordeling er svært liten, som vi forventet ut i fra histogrammet i \ref{fig:histoUniform5}.\\
+Vi ser her at forskjellen mellom standard normalfordelingen og vår fordeling er svært liten, som vi forventet ut i fra histogrammet i \ref{fig:histoUniform5}.\\
 
-\textit{Jeg kommer til å ha sannsynligheten og forskjellen fra normalfordelingen i de samme tabellene i resten av oppgaven.}
+Vi kan så sjekke hvor standard normalfordelt det standariserte gjennomsnittet er ved hjelp av et normalsannsynlighetsplot. For den uniforme fordelingen med $n = 5$ blir dette:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{percentUniform5}
+\caption{Normalsannsynlighetsplot for uniform fordeling med $n = 5$}
+\end{figure}
+
+Om vår fordeling hadde vært helt standardnormalfordelt ville vi forventet en helt rett linje. Vi kan se at fordelingen er ganske standard normalfordelt, men vi ser fra avbøyningene i endene at den ikke er helt perfekt. En av grunnene til dette kan være fordi vi har for så datapunkter, så vi kan ende opp med en litt skjev fordeling, som forutsaker avviket fra den rette linjen.
 
 \subsection*{g)}
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{histoUniform15}
+        \caption{Histogram for en uniform fordeling med $n = 15$}
+        \label{fig:HU15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[scale=0.3]{histoUniform50}
+        \caption{Histogram for en uniform fordeling med $n = 50$}
+        \label{fig:HU50}
+    \end{subfigure}
+\end{figure}
+
+Vi kan se at vi nå får noe som ser mye mer ut som en standard normalfordeling. Dette er det vi forventer av flere verdier vår vi regner ut det standariserte gjennomsnittet. Ser vi på $n = 50$ ser vi at vi har en fordeling som er svært like en normalfordelingen. Vi kan så se på de relative frekvensene til fordelingen:
+
+[ 0.1786997   0.05196549  0.03988167  0.03536333  0.03524289  0.01168657
+  0.02696331  0.02480423  0.07351214  0.04183053  0.05801126  0.03065136]
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c| c| c| c|}
+\hline
+Interval & Sannsynlighet $n = 15$ & Forskjell $n = 15$ &Sannsynlighet $n = 50$ & Forskjell $n = 50$ \\
+\hline
+$- \infty$ til $-2.5$ & 0.0055 & 0.082 & 0.0065 & 0.179\\
+$- 2.5$ til $-2.0$ & 0.0174 & 0.112 & 0.0176 & 0.052\\
+$- 2.0$ til $-1.5$ & 0.0439 & 0.046 & 0.0424 & 0.04\\
+$- 1.5$ til $-1.0$ & 0.0928 & 0.0136 & 0.09 & 0.035\\
+$- 1.0$ til $-0.5$ & 0.1484 & 0.004 & 0.1499 & 0.035\\
+$- 0.5$ til $0.0$ & 0.19 & 0.009 & 0.1933 & 0.012\\
+
+$ 0.0$ til $0.5$ & 0.1849 & 0.026 & 0.1963 & 0.027\\
+$ 0.5$ til $1.0$ & 0.1507 & 0.017 & 0.146 & 0.025\\
+$ 1.0$ til $1.5$ & 0.0957 & 0.038 & 0.0943 & 0.074\\
+$ 1.5$ til $2.0$ & 0.047 & 0.021 & 0.0417 & 0.042\\
+$ 2.0$ til $2.5$ & 0.0188 & 0.076 & 0.0171 & 0.058\\
+$ 2.5$ til $\infty$ & 0.0049 & 0.134 & 0.0049 & 0.031\\ \hline
+\end{tabular}
+\caption{Forskjellen til en unifrom fordeling med $n = 5$}
+\label{tab:forskjellUniform5}
+\end{table}
+Som vi forventet er det veldig liten forskjell mellom den relative frekvensen til vår fordeling og standard normalfordelingen. Selv om det er histogrammet til $n = 50$ som ser mest normalfordelt ut, så kan vi se fra den relative forskjellen at $n=15$ er noe nærmere normalfordlingen enn $n = 50$, men ikke med mye. Vi ser noe av det samme om vi ser på normalsannsynlighetsplottene:
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.40\textwidth}
+	\centering
+        \includegraphics[scale=0.34]{percentUniform15}
+        \caption{Normalsannsynlighetsplot for uniform fordeling med $n = 15$}
+        \label{fig:PU15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.35\textwidth}
+    \centering
+        \includegraphics[scale=0.34]{percentUniform50}
+        \caption{Normalsannsynlighetsplot for uniform fordeling med $n = 50$}
+        \label{fig:PU50}
+    \end{subfigure}
+\end{figure}
+
+
+For begge verdiene av $n$ har vi nesten en rett linje. Så vi kan se at vi ikke trenger mange datapunkter for det standardiserte gjennomsnittet før vi nesten har en standard normalfordeling.
+
+
+\subsection*{h)}
+
+Vi skal nå gjøre det samme vi gjorde over bare med en gammafordeling. Først ser vi på histogrammene:
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{histoGamma5}
+        \caption{Histogram for en gammafordeling med $n = 5$}
+        \label{fig:HG15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[scale=0.3]{histoGamma15}
+        \caption{Histogram for en gammafordeling med $n = 15$}
+        \label{fig:HG50}
+    \end{subfigure}
+     ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[scale=0.3]{histoGamma50}
+        \caption{Histogram for en gammafordeling med $n = 50$}
+        \label{fig:HG50}
+    \end{subfigure}
+\end{figure}
+
+Vi kan se at det standariserte gjennomsnitte til gammafordelingen ser mye mindre normalfordelt ut. For de lave verdiene av $n$ har vi en ganske høy positiv skjevhet. For $n = 50$ begynner vi å se en likhet med normalfordelingen, men det er fortsatt noe skjevhet. Vi kan så se på forskjellen på sannsynligheten til standardnormalfordelingen og de relative frekvensene. Siden det er så vanvittig mange tall, som tar veldig lang tid å skrive inn i tabeller, så gir jeg heller fra nå at utskrifen fra programmet mitt. Verdien er gitt i samme rekkefølge som intervallene oppgitt i oppgaven:
+
+\subsubsection*{Relative frekvens for n=5}
+\begin{Verbatim}[frame = single]
+[ 0.      0.      0.0015  0.1239  0.2356  0.2201  0.1685  0.1035  0.0646
+  0.0369  0.0191  0.0263]
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=5}
+\begin{Verbatim}[frame = single]
+[ 1.          1.          0.96595325  0.34896709  0.57190024  0.1495726
+  0.11993192  0.30945808  0.29666446  0.16244996  0.15474372  3.23533292]
+\end{Verbatim}
+
+\subsubsection*{Relative frekvens for n=15}
+\begin{Verbatim}[frame = single]
+[ 0.      0.0022  0.032   0.115   0.1909  0.2016  0.172   0.1269  0.0793
+  0.0402  0.0218  0.0181]
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=15}
+\begin{Verbatim}[frame = single]
+[ 1.          0.86699287  0.27366935  0.25206792  0.2736662   0.05294792
+  0.10165158  0.15333556  0.13661751  0.08754712  0.31797975  1.91481087]
+\end{Verbatim}
+
+\subsubsection*{Relative frekvens for n=50}
+\begin{Verbatim}[frame = single]
+[ 0.0008  0.0105  0.0415  0.1014  0.1678  0.1977  0.1847  0.1342  0.0848
+  0.0408  0.0221  0.0137]
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=50}
+\begin{Verbatim}[frame = single]
+[ 0.87116858  0.36519324  0.05803993  0.10399728  0.11954525  0.03257839
+  0.03532004  0.10463068  0.07673601  0.07392842  0.33611708  1.20623806]
+\end{Verbatim}
+
+
+Her ser vi akkurat det samme som vi så på histogrammene; for de to lave verdiene av $n$ har vi langt fra normalfordelingen. Ute i kantene har vi opp til over $300\%$ forskjell mellom fordelingen og normalfordelingen. For $n = 50$ nærmer vi oss, men på kantene er det fortsatt rundt $100\%$ forskjell, noe vi ikke var i nærheten av med den uniforme fordelingen. Vi ser på slutt på normalsannsynlighetsplottene:
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentGamma5}
+        \caption{Normalsannsynlighetsplottet for en gammafordeling med $n = 5$}
+        \label{fig:PG15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentGamma15}
+        \caption{Normalsannsynlighetsplottet for en gammafordeling med $n = 15$}
+        \label{fig:PG50}
+    \end{subfigure}
+     ~
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentGamma50}
+        \caption{Normalsannsynlighetsplottet for en gammafordeling med $n = 50$}
+        \label{fig:PG50}
+    \end{subfigure}
+\end{figure} 
+
+Som forventet er vi ikke i nærheten av å få rette linjer. Jo høyere $n$ er, jo rettere blir linjen, men selv for $n = 50$ er vi ganske langt unna en rett linje. Vi ser at linjene er bøyd oppover, dette er fordi fordelingene hadde positiv skjevhet. Dette viser at det standariserte gjennomsnittet til en gammafordelingen går saktere mot standardnormalfordelingen.
+
+\subsubsection*{i)}
+
+Vi skal nå se på de samme figurene for en Bernoullifordelinge. Vi starter med histogrammene:
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{histoBernoulli5}
+        \caption{Histogram for en bernoullifordeling med $n = 5$}
+        \label{fig:HB15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[scale=0.3]{histoBernoulli15}
+        \caption{Histogram for en bernoullifordeling med $n = 15$}
+        \label{fig:HB50}
+    \end{subfigure}
+     ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[scale=0.3]{histoBernoulli50}
+        \caption{Histogram for en bernoullifordeling med $n = 50$}
+        \label{fig:HB50}
+    \end{subfigure}
+\end{figure}
+
+Siden Bernoullifordelingen gir et binært utfall, så er det bare en diskret mengde standardiserte gjennomsnitt det er mulig å oppnå for en gitt $n$. Dette kan vi se ut i fra histogrammene over. Det er derfor ganske vanskelig å se hva slags fordeling vi får. Men vi kan se at det har likheter med normalfordelingen, men har en negativ skjevhet(en hale mot venstre). For $n = 50$ har vi fått så mange punkter at det er mulig å se at fordelingen går mot standardnormalfordelingen, selv om vi fortsatt kan se noe negativ skjevhet. Det er ikke rart at vi ser en negativ skjevhet, siden Bernoullifordelingen er veldig skjev, siden et utfall har $p = 0.75$, mens det andre bare har $p = 0.25$. La oss så se på de relative frekvensene:
+
+\subsubsection*{Relative frekvens for n=5}
+\begin{Verbatim}[frame = single]
+[ 0.0145  0.      0.0867  0.      0.261   0.      0.3973  0.      0.2405
+  0.      0.      0.    ]
+
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=5}
+\begin{Verbatim}[frame = single]
+[ 1.33506948  1.          0.96790212  1.          0.74136657  1.          1.0750804
+  1.          1.61845508  1.          1.          1.        ]
+\end{Verbatim}
+
+\subsubsection*{Relative frekvens for n=15}
+\begin{Verbatim}[frame = single]
+[ 0.0177  0.      0.04    0.0908  0.1615  0.2238  0.2228  0.      0.1598
+  0.0687  0.0149  0.    ]
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=15}
+\begin{Verbatim}[frame = single]
+[ 1.85039516  1.          0.09208668  0.01141072  0.07751226  0.16889754
+  0.16367458  1.          0.73983003  0.55934112  0.09917898  1.        ]
+\end{Verbatim}
+
+\subsubsection*{Relative frekvens for n=50}
+\begin{Verbatim}[frame = single]
+[ 0.0056  0.0253  0.0283  0.1087  0.0905  0.2341  0.2459  0.098   0.119
+  0.0249  0.0179  0.0018]
+\end{Verbatim}
+
+\subsubsection*{Relativ forskjell fra standard normalfordelingn for n=50}
+\begin{Verbatim}[frame = single]
+[ 0.09818006  0.529582    0.35765133  0.18347637  0.39619282  0.22269399
+  0.28432487  0.34615355  0.29561811  0.43482396  0.08219438  0.71012931]
+\end{Verbatim}
+
+Igjen mangle er det data for mange av punktene der vi ikke har fått noe standardisert gjennomsnitt, og som vi da forventer, så er den relative forskjell her. Men for $n = 50$ har vi fått mer data, men likevel har vi en ganske stor relativ forskjell, generelt $20-70\%$. Vi kan så se på normalsannsynlighetsplottene:
+
+
+\begin{figure}[H]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentBernoulli5}
+        \caption{Normalsannsynlighetsplottet for en Bernoullifordeling med $n = 5$}
+        \label{fig:PB15}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentBernoulli15}
+        \caption{Normalsannsynlighetsplottet for en Bernoullifordeling med $n = 15$}
+        \label{fig:PB50}
+    \end{subfigure}
+     ~
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[scale=0.3]{percentBernoulli50}
+        \caption{Normalsannsynlighetsplottet for en Bernoullifordeling med $n = 50$}
+        \label{fig:PB50}
+    \end{subfigure}
+\end{figure} 
+
+
+Igjen, siden vi bare kan få noen diskrete verdier for det standardiserte gjennomsnittet, så får vi en hakkete kurve. Selv om det er vanskelig å få en trend fra de lave verdiene av $n$, så ser vi at vi får en nogenlund rett kurve etterhvert. Men den bøyer seg litt nedover, som reflekterer den negative skjevheten. Vi kan se det standardiserte gjennomsnittet til en Bernoullifordelingen har en moderat likehet med standardnormalfordelingen, selv om den selv for store $n$ er fordelingen litt skjev grunnet verdien av $p$ for Bernoullifordelingen.
+
+
+\subsection*{j)}
+
+Som vi har sett i de forrige deloppgavene går de standardiserte gjennomsnitten til de forskjellige fordelingene alle mot standardnormalfordelingen, men med forskjellige 'hastigheter'.\\
+
+Av de fordelingen vi har sett på, så er det den uniforme fordelingen som ligner mest på normalfordelingen. Jeg tror det har å gjøre med at den uniforme fordelingen har sannsynlighetsfordelingen symmetrisk rundt gjennomsnittet, akkurat som normalfordelingen. Mens Bernoulli- og gammafordelingen har en, forholdsvis, negativ og positiv skjevhet om gjennomsnittet. Dette gjør at vi trenger høyere verdier av $n$ for at disse fordelingen skal ligne på normalfordelingen. \\
+
+Om denne hypotesen er korrekt har vi for få fordelinger til å si konkret. Men det vi hvertfall kan se ut fra oppgaven er at den uniforme fordelingen nærmer seg normalfordelingen raskere enn Bernoullifordelingen, som nærmer seg raskere enn gammafordelingen.
+
 
 
 
